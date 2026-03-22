@@ -12,7 +12,7 @@ app.get('/', async (req, res) => {
     let response = await fetch(url);
     let data = await response.json();
 
-    console.log(data);
+    // console.log(data);
 
     let randomNumber = Math.floor(Math.random() * 50);
 
@@ -35,12 +35,12 @@ app.get('/planetInfo', (req, res) => {
 });
 
 app.get('/NASAPOD', async (req, res) => {
-
-    let url = "https://api.nasa.gov/planetary/apod?api_key=9mUzIkhlZCZaOoMfspg7jMmwZCZ4LiRHtkgkambD&date=2026-03-11"
+    let today = new Date().toJSON().slice(0, 10);  
+    let url = `https://api.nasa.gov/planetary/apod?api_key=9mUzIkhlZCZaOoMfspg7jMmwZCZ4LiRHtkgkambD&date=${today}`;
     let response = await fetch(url);
     let data = await response.json();
-    // console.log(data);
-    let img = data.hdurl;
+    console.log(data);
+    let img = data.url;
     res.render('NasaPod.ejs', {img});
 });
 
